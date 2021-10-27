@@ -1,0 +1,13 @@
+core-site.xml
+
+#1、用于设置hadoop的默认文件系统
+#	例如把文件上传到 /opt时，就是ip:port/opt
+#2、HDFS的守护进程用该值来确认namenode的主机及端口（默认端口8082,可修改）
+fs.defaultFS=hdfs://ip:port
+
+#1、文件系统块的副本
+dfs.replication
+
+#1、是否启用权限控件
+dfs.permissions.enabled
+

@@ -1,0 +1,5 @@
+汇编指令
+add
+mov
+jmp
+sub a,b //a=a-b

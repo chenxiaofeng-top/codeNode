@@ -1,0 +1,28 @@
+--命令
+npm install webpack@3.6.0 -g(global全局的，一般不用)(--save-dev,本地安装)  安装webpack  
+
+npm init (初始化node的环境)
+
+webapck   source.js  dist.js  打包，会从source.js一步一步找依赖
+
+npm run build(运行的用service)  (更高级的打包，读取配置文件(package.json里的scripts))
+
+
+
+
+
+
+
+
+
+
+
+--配置文件--
+package.json
+webpack.config.js
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+/etc/profile
+
+ hadoop-env.sh、
+ mapred-env.sh、
+ yarn-env.sh
+ 
+ {HADOOP_HOME}/etc/hadoop/core-site.xml
+	${HADOOP_HOME}/etc/hadoop/hdfs-site.xml
+ 
+ core-site.xml 
+	1、fs.defaultFS参数配置的是HDFS的(服务)地址。
+	2、hadoop.tmp.dir配置的是Hadoop临时目录
+
+ hdfs-site.xml
+	1、dfs.replication配置的是HDFS存储时的备份数量，因为这里是伪分布式环境只有一个节点，所以这里设置为1。
+
+	
+	hdfs namenode –format
+	${HADOOP_HOME}/sbin/hadoop-daemon.sh start namenode
+	${HADOOP_HOME}/sbin/hadoop-daemon.sh start datanode
+	${HADOOP_HOME}/sbin/hadoop-daemon.sh start secondarynamenode
+	
+	${HADOOP_HOME}/sbin/yarn-daemon.sh start resourcemanager
+	${HADOOP_HOME}/sbin/yarn-daemon.sh start nodemanager
+	
+	开启历史服务
+	${HADOOP_HOME}/sbin/mr-jobhistory-daemon.sh start historyserver
+	
+	停止hadoop
+	${HADOOP_HOME}/sbin/hadoop-daemon.sh stop namenode
+	${HADOOP_HOME}/sbin/hadoop-daemon.sh stop datanode
+	${HADOOP_HOME}/sbin/hadoop-daemon.sh stop secondarynamenode
+	${HADOOP_HOME}/sbin/yarn-daemon.sh stop resourcemanager
+	${HADOOP_HOME}/sbin/yarn-daemon.sh stop nodemanager
+	
+	启动异常看日志 
+第一步：定位出错的原因。
+可以通过分析hadoop的日志文件信息来定位问题的发生原因。这里我们的问题是namenode启动异常，所以可以cd进入hadoop目录中的logs文件中，打开namenode的log文件，namenode的log文件命名为hadoop-root-namenode-instance-XXX.log，可以使用more 命令打开这个文件，空格翻到最后一页查看日志，发现日志中有如下错误：java.lang.IllegalArgumentException: Invalid URI for NameNode address (check fs.defaultFS): file:/// has no authority.
+
+
+Incorrect configuration: namenode address dfs.namenode.servicerpc-address or dfs.namenode.rpc-address is not configured.
+
+经调查结果是由于主机的hostname不合法，修改为不包含着‘.’ '/' '_'等非法字符。
+
+
+
+二十、 Hadoop各个功能模块的理解
+
+1、 HDFS模块
+
+HDFS负责大数据的存储，通过将大文件分块后进行分布式存储方式，突破了服务器硬盘大小的限制，解决了单台机器无法存储大文件的问题，HDFS是个相对独立的模块，可以为YARN提供服务，也可以为HBase等其他模块提供服务。
+
+2、 YARN模块
+
+YARN是一个通用的资源协同和任务调度框架，是为了解决Hadoop1.x中MapReduce里NameNode负载太大和其他问题而创建的一个框架。
+
+YARN是个通用框架，不止可以运行MapReduce，还可以运行Spark、Storm等其他计算框架。
+
+3、 MapReduce模块
+
+MapReduce是一个计算框架，它给出了一种数据处理的方式，即通过Map阶段、Reduce阶段来分布式地流式处理数据。它只适用于大数据的离线处理，对实时性要求很高的应用不适用。
+
+
+
+二十四、开启日志聚集
