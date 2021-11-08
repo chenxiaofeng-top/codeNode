@@ -1,21 +1,10 @@
 # codeNode
-笔记本
 
-待整理
-
-java se
-
+java se  仅记录个人不太熟悉的地方
 spring boot
-
 android
-
-软件设计模式
-
 linux
-
 kotlin
-
 golang
-
-
+log4j
 
