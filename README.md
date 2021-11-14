@@ -1,10 +1,20 @@
-# codeNode
+## 个人知识笔记整理
 
-java se  仅记录个人不太熟悉的地方
-spring boot
-android
-linux
-kotlin
-golang
-log4j
+### 已整理
 
+- 软件设计模式
+- golang
+  - 基础语法理解
+  - 并发
+- markdown语法
+- adb常用命令
+- git
+  - 不同仓库的账号管理
+
+### 待整理
+
+- spring boot
+- android
+- kotlin
+- log4j
+- linux
