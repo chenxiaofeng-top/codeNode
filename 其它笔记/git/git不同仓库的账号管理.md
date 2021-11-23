@@ -26,13 +26,13 @@ ssh-keygen -t rsa -C "邮件地址"
 
 ![image-20211027175416578](img/image-20211027175416578.png)
 
-完成后把公钥分配到对应的git服务商
+完成后把公钥分配到对应的git服务商，window位置C:\Users\\{用户名}\\.ssh
 
 ### 2，在.ssh目录下创建config文件，配置每个仓库与私钥的关系
 
 ```properties
 Host github.com                 
-    HostName github.com 域名地址
+    HostName github.com 域名地址 “git@e.coding.net:platformcs”中的e.coding.net
     IdentityFile id_rsa的地址
     PreferredAuthentications publickey 配置登录时的权限认证 (取值publickey,password publickey,keyboard-interactive等)
     User 用户名
