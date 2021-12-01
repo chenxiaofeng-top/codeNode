@@ -13,10 +13,10 @@
 
 ### 待整理
 
+- java并发多线程整理
 - redis
+- linux
 - spring boot
 - android
 - kotlin
 - log4j
-- linux
-- java并发多线程整理
