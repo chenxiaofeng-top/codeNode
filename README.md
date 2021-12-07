@@ -18,5 +18,5 @@
 - linux（有台服务器）
 - spring boot
 - android
-- kotlin
+- kotlin，jetpack compose
 - log4j
