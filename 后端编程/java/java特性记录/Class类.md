@@ -13,18 +13,18 @@
 ```
 
 3. 属性获取：
-  ```java
+```java
   Field getField(name)：根据字段名获取某个public的field（包括父类）
   Field getDeclaredField(name)：根据字段名获取当前类的某个field（不包括父类）
   Field[] getFields()：获取所有public的field（包括父类）
   Field[] getDeclaredFields()：获取当前类的所有field（不包括父类）
-  ```
+```
 
   
 
 4. Field 获得的属性的信息：
 
- ```java
+```java
  getName():返回字段名称，例如，"name"
  getType():返回字段类型，也是一个Class实例，例如，String.class
  get(Object obj) ： 取得obj对象这个Field上的值
@@ -44,11 +44,10 @@
  
  //允许获取私有字段
  Field.setAccessible(true)
- ```
+```
+5.Method 获得的属性的信息：
 
-5. Method 获得的属性的信息：
-
-   ```java
+```java
    所有Method信息
    Method getMethod(name, Class...)：获取某个public的Method（包括父类）
    Method getDeclaredMethod(name, Class...)：获取当前类的某个Method（不包括父类）
@@ -66,11 +65,11 @@
    Method.setAccessible(true)
        
        
-   ```
+```
 
-   6,构造方法
+6,构造方法
 
-   ```
+   ```java
    public且无参数构造方法
    Person p = Person.class.newInstance();
    
