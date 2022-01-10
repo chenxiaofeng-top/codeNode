@@ -13,12 +13,15 @@
 - java并发多线程整理
 - redis
 - chrome扩展
+- android
+  - 组件化
+  - adb相关命令
+  - SimpleExoPlayer
 
 ### 待整理
 
 - linux（有台服务器）
 - spring boot
-- android
 - kotlin，jetpack compose
 - log4j
 - 自己的代码库
