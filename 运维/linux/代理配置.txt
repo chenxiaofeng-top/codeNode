@@ -1,0 +1,7 @@
+#系统走代理
+host_ip=$(cat /etc/resolv.conf |grep "nameserver" |cut -f 2 -d " ")
+export ALL_PROXY="http://$host_ip:7890"
+
+#git走代理
+git config --global http.proxy http://172.25.128.1:7890
+git config --global https.proxy https://172.25.128.1:7890
