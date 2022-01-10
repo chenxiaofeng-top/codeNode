@@ -11,12 +11,14 @@
 - git
   - 不同仓库的账号管理
 - java并发多线程整理
+- redis
 
 ### 待整理
 
-- redis
 - linux（有台服务器）
 - spring boot
 - android
 - kotlin，jetpack compose
 - log4j
+- 自己的代码库
+- 微信小程序
