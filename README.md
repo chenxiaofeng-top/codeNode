@@ -23,7 +23,9 @@
 
 - linux（有台服务器）
 - spring boot
+- 微信小程序
+- docker
 - kotlin，jetpack compose
 - log4j
 - 自己的代码库
-- 微信小程序
+- 人工智能
