@@ -18,6 +18,7 @@
   - adb相关命令
   - SimpleExoPlayer
 - docker
+- maven
 
 ### 待整理
 
