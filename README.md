@@ -23,10 +23,22 @@
 ### 待整理
 
 - linux（有台服务器）
+  - shell编程
+- 代码库
+  - hutool代码，思维导图
+  - 自己的写的接口及实现
+  - 线程相关
+- 数据库设计
+- spring
+- spring mvc
 - spring boot
 - 微信小程序
-- docker
 - kotlin，jetpack compose
 - log4j
 - 自己的代码库
 - 人工智能
+- 研发文档
+- 阿里巴巴Java开发手册-个人理解
+
+
+

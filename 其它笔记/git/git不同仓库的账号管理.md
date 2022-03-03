@@ -35,16 +35,26 @@ Host github.com
     HostName github.com 域名地址 “git@e.coding.net:platformcs”中的e.coding.net
     IdentityFile id_rsa的地址,可以写多个通过","分开会依次尝试
     PreferredAuthentications publickey 配置登录时的权限认证 (取值publickey,password publickey,keyboard-interactive等)
-    User 用户名
+    User 用户名 域名地址 “git@e.coding.net:platformcs”中的git
+
+修复： 
+对于这种仓库:
+git@github.com:chenxiaofeng-top/codeNode.git 为以下配置
+
+Host private               
+HostName github.com
+IdentityFile C:\oneDrive\Nssh\private\id_rsa_private
+PreferredAuthentications publickey
+User git(一般来说，就是git,)
 ```
 
-![image-20211027175805826](img/image-20211027175805826.png)
+!![image-20220303151018064](img/image-20220303151018064-16462914202942.png)
 
 ### 3，在Git Bash客户端执行测试命令,会自动生成known_hosts
 
 ```sh
- ssh -T git@gitee.com
- ssh -T git@github.com
+ ssh -T git@gitee.com (Host的值)
+ ssh -T private
 ```
 
 ![image-20211027180603894](img/image-20211027180603894.png)

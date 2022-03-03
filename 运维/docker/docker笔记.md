@@ -105,6 +105,7 @@ VOLUME 定义匿名卷
 EXPOSE 暴露端口
 	EXPOSE 指令是声明容器运行时提供服务的端口，这只是一个声明，在容器运行时并不会因为这个声明应用就会开启这个端口的服务。在 Dockerfile 中写入这样的声明有两个好处，一个是帮助镜像使用者理解这个镜像服务的守护端口，以方便配置映射；另一个用处则是在运行时使用随机端口映射时，也就是 docker run -P 时，会自动随机映射 EXPOSE 的端口。
 	要将 EXPOSE 和在运行时使用 -p <宿主端口>:<容器端口> 区分开来。-p，是映射宿主端口和容器端口，换句话说，就是将容器的对应端口服务公开给外界访问，而 EXPOSE 仅仅是声明容器打算使用什么端口而已，并不会自动在宿主进行端口映射。
+
 WORKDIR 指定工作目录
 	WORKDIR <容器内部工作目录路径>，如果不存在，就会自动创建
 	WORKDIR /app
@@ -271,4 +272,17 @@ b47060aca56b    busybox   "sh"        11 minutes ago      Up 11 minutes         
 ```
 
 ## Docker Compose
+
+### 安装
+
+```shell
+#到github找最新的https://github.com/docker/compose/releases
+
+# 下载1.25.0 docker compose
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# 添加可执行权限
+sudo chmod +x /usr/local/bin/docker-compose
+# 测试安装
+sudo docker-compose --version
+```
 
