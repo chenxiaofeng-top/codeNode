@@ -34,7 +34,7 @@ ssh-keygen -t rsa -C "邮件地址"
 Host github.com                 
     HostName github.com 域名地址 “git@e.coding.net:platformcs”中的e.coding.net
     IdentityFile id_rsa的地址,可以写多个通过","分开会依次尝试
-    PreferredAuthentications publickey 配置登录时的权限认证 (取值publickey,password publickey,keyboard-interactive等)
+    PreferredAuthentications publickey 配置登录时的权限认证 (取值publickey,password publickey,keyboard-interactive等，PreferredAuthentications 强制使用Public Key验证)
     User 用户名 域名地址 “git@e.coding.net:platformcs”中的git
 
 修复： 
