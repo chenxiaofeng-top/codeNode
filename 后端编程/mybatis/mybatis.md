@@ -187,6 +187,8 @@ public class ExampleTypeHandler extends BaseTypeHandler<String> {
 
 ```xml
 <!-- 将包内的映射器接口实现全部注册为映射器 -->
+<!-- 把mapper.xml放到接口的同一目录下 -->
+<!-- 或着在resources中创建同一目录 -->
 <mappers>
     <package name="org.mybatis.builder"/>
 </mappers>
@@ -196,10 +198,199 @@ public class ExampleTypeHandler extends BaseTypeHandler<String> {
 
 ## XML 映射器 mapper.xml
 
+- select
+
 ```xml
 <!-- 方法名id，参数parameterType(可以不写，自动识别)，返回类型resultType  -->
 <select id="selectPerson" parameterType="int" resultType="hashmap">
     SELECT * FROM PERSON WHERE ID = #{id}
 </select>
+
+<select
+  id="selectPerson"
+  parameterType="int"
+  parameterMap="deprecated" 目前已被废弃
+  resultType="hashmap"
+  resultMap="personResultMap"
+  flushCache="false"
+  useCache="true"
+  timeout="10"
+  fetchSize="256"
+  statementType="PREPARED"
+  resultSetType="FORWARD_ONLY">
+```
+
+- 其它
+```xml
+  <insert
+    id="insertAuthor"
+    parameterType="domain.blog.Author"
+    flushCache="true"
+    statementType="PREPARED"
+    keyProperty=""
+    keyColumn=""
+    useGeneratedKeys=""
+    timeout="20">
+  
+  <update
+    id="updateAuthor"
+    parameterType="domain.blog.Author"
+    flushCache="true"
+    statementType="PREPARED"
+    timeout="20">
+  
+  <delete
+    id="deleteAuthor"
+    parameterType="domain.blog.Author"
+    flushCache="true"
+    statementType="PREPARED"
+    timeout="20">
+      
+ <insert id="insertAuthor">
+  insert into Author (id,username,password,email,bio)
+  values (#{id},#{username},#{password},#{email},#{bio})
+</insert>
+
+<update id="updateAuthor">
+  update Author set
+    username = #{username},
+    password = #{password},
+    email = #{email},
+    bio = #{bio}
+  where id = #{id}
+</update>
+
+<delete id="deleteAuthor">
+  delete from Author where id = #{id}
+</delete>
+```
+
+- insert 获得插入数据库时的主键
+
+```xml
+自动生成的主键,多条语句也生效
+<insert id="insertAuthor" useGeneratedKeys="true"
+        keyProperty="id">
+    insert into Author (username, password, email, bio) values
+    <foreach item="item" collection="list" separator=",">
+        (#{item.username}, #{item.password}, #{item.email}, #{item.bio})
+    </foreach>
+</insert>
+```
+
+##   SQL 代码片段
+
+```xml
+<sql id="userColumns"> ${alias}.id,${alias}.username,${alias}.password </sql>
+<include refid="userColumns">
+    <property name="alias" value="t1"/>
+</include>
+
+另外共同对象的空判断，可以省Sql
+```
+
+## 结果映射
+
+```xml
+<!-- SQL 映射 XML 中 -->
+<select id="selectUsers" resultType="User">
+  select id, username, hashedPassword
+  from some_table
+  where id = #{id}
+</select>
+
+<resultMap id="userResultMap" type="User">
+  <id property="id" column="user_id" />
+  <result property="username" column="user_name"/>
+  <result property="password" column="hashed_password"/>
+</resultMap>
+<select id="selectUsers" resultMap="userResultMap">
+  select user_id, user_name, hashed_password
+  from some_table
+  where id = #{id}
+</select>
+```
+
+- 一对一映射，查询另一个表，形成一个对象，可能需要在Sql取别名
+
+```xml
+单个对象用association，通过javaType告诉mybatis生成什么类型的对象，可以指定resultMap="authorResult"
+<association property="author" javaType="Author" >
+    <id property="id" column="author_id"/>
+    <result property="username" column="author_username"/>
+    <result property="password" column="author_password"/>
+    <result property="email" column="author_email"/>
+    <result property="bio" column="author_bio"/>
+    <result property="favouriteSection" column="author_favourite_section"/>
+</association>
+```
+
+- 一对多映射，可能需要在Sql中取别名
+  - 可以嵌套association
+
+```xml
+多个对象用collection，通过ofType告诉mybatis生成List<obj>中的obj是什么类型
+<collection property="posts" ofType="Post">
+    <id property="id" column="post_id"/>
+    <result property="subject" column="post_subject"/>
+    <association property="author" javaType="Author"/>
+    <collection property="comments" ofType="Comment">
+        <id property="id" column="comment_id"/>
+    </collection>
+    <collection property="tags" ofType="Tag" >
+        <id property="id" column="tag_id"/>
+    </collection>
+    <discriminator javaType="int" column="draft">
+        <case value="1" resultType="DraftPost"/>
+    </discriminator>
+</collection>
+```
+
+## discriminator 标签
+
+- https://www.hxstrive.com/subject/mybatis.htm?id=206
+- https://www.jianshu.com/p/0235e9245056
+- 针对同一条sql在不同的情况返回不同的值，对应相关的映射
+
+## 缓存
+
+```xml
+<cache/>
+
+<cache
+  eviction="FIFO"
+  flushInterval="60000"
+  size="512"
+  readOnly="true"/>
+```
+
+## 动态 SQL
+
+- if
+- choose (when, otherwise)
+- trim (where, set)
+- foreach
+
+```xml
+<if test="author != null and author.name != null">
+    AND author_name like #{author.name}
+</if>
+
+<choose>
+    <when test="title != null">
+        AND title like #{title}
+    </when>
+    <when test="author != null and author.name != null">
+        AND author_name like #{author.name}
+    </when>
+    <otherwise>
+        AND featured = 1
+    </otherwise>
+</choose>
+
+<foreach item="item" index="index" collection="list"
+         open="ID in (" separator="," close=")" nullable="true">
+    #{item}
+</foreach>
 ```
 

@@ -108,3 +108,16 @@ docker-compose up [选项] [SERVICE...]
 
 7）-t, --timeout TIMEOUT 停止容器时候的超时（默认为 10 秒）。
 
+### 安装
+
+```shell
+#到github找最新的https://github.com/docker/compose/releases
+
+# 下载1.25.0 docker compose
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# 添加可执行权限
+sudo chmod +x /usr/local/bin/docker-compose
+# 测试安装
+sudo docker-compose --version
+```
+
