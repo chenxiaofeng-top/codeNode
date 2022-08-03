@@ -22,6 +22,7 @@
 
 ### 待整理
 
+- 完成spring mvc boot的dome
 - linux（有台服务器）
   - shell编程
 - 代码库
@@ -39,6 +40,11 @@
 - 人工智能
 - 研发文档
 - 阿里巴巴Java开发手册-个人理解
+- android
+  - mvvm架构
+  - 依赖注入
+    - Dagger 
+    - Hilt 
 
 
 

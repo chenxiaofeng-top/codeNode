@@ -124,7 +124,7 @@ while (index < items.size) {
 
 ```kotlin
 fun describe(obj: Any): String =
-    when (obj) {//跟switch类似，但有kotlin特性
+    when (obj) {//跟switch类似，但有kotlin特性，不需要在后面加break
         1          -> "One"
         "Hello"    -> "Greeting"
         is Long    -> "Long"
