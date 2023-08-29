@@ -82,6 +82,10 @@ driver: bridge
 
 参考：https://www.cjavapy.com/article/2355/
 
+https://blog.csdn.net/qq_36850813/article/details/102506111
+
+down：删除所有容器，up:启动，如果不存在就创建，可以不用start，stop：只是停止，不会删除，start:在stop下启动(docker-compose stop)
+
 ### 20、docker-compose up 命令
 
 尝试自动完成包括构建镜像，（重新）创建服务，启动服务，并关联服务相关容器的一系列操作
